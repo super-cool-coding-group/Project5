@@ -556,8 +556,8 @@ public class ResizeableList<T> implements ListInterface<T> {
         }
         output += "]";
 
-        output += "\nCapacity: " + array.length;
-        output += "\nNumEntries: " + numOfEntries;
+        output += ", Capacity: " + array.length;
+        output += ", NumEntries: " + numOfEntries;
 
         return output;
     }

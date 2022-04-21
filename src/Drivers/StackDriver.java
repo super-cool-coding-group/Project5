@@ -15,6 +15,24 @@ public class StackDriver{
 
     public static void main(String[] args){
 
+        StackInterface<Integer> testStack = new Stack<Integer>(1);
+
+        System.out.println(testStack);
+
+        testStack.push(1);
+        System.out.println(testStack);
+
+        testStack.push(2);
+        System.out.println(testStack);
+
+        System.out.println(testStack.peek());
+
+        testStack.push(3);
+        System.out.println(testStack);
+
+        System.out.println(testStack.peek());
+        System.out.println(testStack.pop());
+        System.out.println(testStack);
     }
 
 }
