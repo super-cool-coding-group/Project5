@@ -1,5 +1,7 @@
 package src.QueueADT;
 
+import src.ListADT.*;
+
 public class Queue<T> implements QueueInterface<T>{
 
     @Override

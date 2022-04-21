@@ -1,5 +1,8 @@
 package src.StackADT;
 
+import src.ListADT.*;
+
+
 public class Stack<T> implements StackInterface<T>{
 
     @Override
