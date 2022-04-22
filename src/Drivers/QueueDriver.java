@@ -37,6 +37,7 @@ public class QueueDriver {
         // Remove entry
         System.out.println("Front of Queue: " + testQueue.getFront());
         System.out.println("Removed Entry: " + testQueue.dequeue());
+        System.out.println("Front of Queue: " + testQueue.getFront());
         System.out.println(testQueue);
 
         // Test clear

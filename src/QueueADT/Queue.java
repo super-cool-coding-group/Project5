@@ -6,8 +6,6 @@ public class Queue<T> implements QueueInterface<T>{
 
     private ResizeableList<T> queue;
     private boolean integrityOk = false;
-    private int frontIndex; // Index of front entry
-    private int backIndex; // Index of back entry
     private static final int DEFAULT_CAPACITY = 3;
 
     public Queue(){
@@ -15,10 +13,7 @@ public class Queue<T> implements QueueInterface<T>{
     }
 
     public Queue(int initialCapacity){
-        ResizeableList<T> tempQueue = new ResizeableList<T>(initialCapacity + 1); 
-        queue = tempQueue;
-        frontIndex = 1;
-        backIndex = initialCapacity;
+        queue = new ResizeableList<T>(initialCapacity); 
         integrityOk = true;
     }
 
@@ -39,9 +34,8 @@ public class Queue<T> implements QueueInterface<T>{
     public T dequeue() {
         // TODO Auto-generated method stub
         checkIntegrity();
-        T front = queue.get(frontIndex); 
-        queue.set(frontIndex, null); 
-        frontIndex = (frontIndex + 1) % queue.getCapacity();
+        T front = queue.get(1); 
+        queue.remove(1); 
         return front;
     }
 
@@ -49,7 +43,7 @@ public class Queue<T> implements QueueInterface<T>{
     public T getFront() {
         // TODO Auto-generated method stub
         checkIntegrity();
-        return queue.get(frontIndex);
+        return queue.get(1);
     }
 
     @Override
