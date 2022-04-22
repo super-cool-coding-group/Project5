@@ -9,11 +9,39 @@ import src.QueueADT.*;
  * The class only has one method: a main method.
  *
  * @author George Matta
+ * @author Angelica Arteaga
  * @version 1.0
  */
 public class QueueDriver {
 
     public static void main(String[] args){
+        Queue<Integer> testQueue = new Queue<Integer>(1);
+
+        System.out.println(testQueue);
+
+        // Add first entry
+        testQueue.enqueue(1);
+        System.out.println(testQueue);
+
+        // Add second entry
+        testQueue.enqueue(2);
+        System.out.println(testQueue);
+
+        // Retrieve front of queue
+        System.out.println("Front of Queue: " + testQueue.getFront());
+
+        // Add third entry
+        testQueue.enqueue(3);
+        System.out.println(testQueue);
+
+        // Remove entry
+        System.out.println("Front of Queue: " + testQueue.getFront());
+        System.out.println("Removed Entry: " + testQueue.dequeue());
+        System.out.println(testQueue);
+
+        // Test clear
+        testQueue.clear();
+        System.out.println(testQueue);
 
     }
 

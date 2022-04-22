@@ -17,7 +17,7 @@ public class Queue<T> implements QueueInterface<T>{
     public Queue(int initialCapacity){
         ResizeableList<T> tempQueue = new ResizeableList<T>(initialCapacity + 1); 
         queue = tempQueue;
-        frontIndex = 0;
+        frontIndex = 1;
         backIndex = initialCapacity;
         integrityOk = true;
     }
@@ -64,6 +64,11 @@ public class Queue<T> implements QueueInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
         queue.clear();
+    }
+
+    @Override
+    public String toString(){
+        return queue.toString();
     }
 
 }
