@@ -435,7 +435,10 @@ public class ResizeableList<T> implements ListInterface<T> {
     public int getIndexOf(T entry) {
 
         // Loop through the array
-        for (int i = 0; i < numOfEntries; i++) {
+        for (int i = 1; i <= numOfEntries; i++) {
+            if(array[i] == null){
+                continue;
+            }
             // If we find the element
             if (array[i].equals(entry)) {
                 // Return the indes

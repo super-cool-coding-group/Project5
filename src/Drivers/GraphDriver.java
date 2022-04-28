@@ -30,13 +30,13 @@ public class GraphDriver {
         graph.addEdge(3, 4);
 
         // Tests hasEdge
-        System.out.println("Has Edge(true) = ");
+        System.out.println("Has Edge(true) = " + graph.hasEdge(1, 2));
 
         // Test getNumberOfVertices
         System.out.println("Vertices(4) = " + graph.getNumberOfVertices());
 
         // Test getNumberOfEdges
-        System.out.println("Edges(3) = " + graph.hasEdge(1, 2));
+        System.out.println("Edges(3) = " + graph.getNumberOfEdges());
 
         // Test getBreadthFirstTraversal
         System.out.println(graph.getBreadthFirstTraversal(1));

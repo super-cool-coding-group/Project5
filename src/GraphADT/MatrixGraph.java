@@ -46,7 +46,11 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     public MatrixGraph(int initialCapacity){
         adjMatrix = new ResizeableList<>(initialCapacity);
         for(int i = 0; i < initialCapacity; i++){
-            adjMatrix.add(new ResizeableList<>(initialCapacity));
+            ListInterface<Boolean> subList = new ResizeableList<>(initialCapacity);
+            for(int ii = 0; ii < initialCapacity; ii++){
+                subList.add(false);
+            }
+            adjMatrix.add(subList);
         }
         vertices = new ResizeableList<>(initialCapacity);
         numEdges = 0;
@@ -94,6 +98,8 @@ public class MatrixGraph<T> implements GraphInterface<T>{
 
         adjMatrix.get(beginIndex).set(endIndex, true);
         numEdges++;
+
+        System.out.println(adjMatrix);
 
         return true;
     }
