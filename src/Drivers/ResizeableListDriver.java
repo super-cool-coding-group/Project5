@@ -100,6 +100,10 @@ public class ResizeableListDriver {
         maxArr.add(5, "hey");
         System.out.println(maxArr);
 
+        System.out.println(maxArr.getIndexOf("hey"));
+        System.out.println(maxArr.getFreqOf("hey"));
+
+
         // maxArr.add(10_000, "he");
         // System.out.println(maxArr);
     }

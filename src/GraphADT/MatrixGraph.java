@@ -99,8 +99,6 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         adjMatrix.get(beginIndex).set(endIndex, true);
         numEdges++;
 
-        System.out.println(adjMatrix);
-
         return true;
     }
 

@@ -264,8 +264,7 @@ public class ResizeableList<T> implements ListInterface<T> {
         // We are definitely removing one entry
         numOfEntries--;
         // We also remove an entry for every trailing null
-        for (; numOfEntries != 0 && array[numOfEntries - 1] == null; numOfEntries--)
-            ;
+        for (; numOfEntries != 0 && array[numOfEntries - 1] == null; numOfEntries--);
 
         // Return the element we removed
         return removed;
@@ -395,7 +394,7 @@ public class ResizeableList<T> implements ListInterface<T> {
         // Initialize the counter variable
         int count = 0;
         // Loop through the array
-        for (int i = 0; i < numOfEntries; i++) {
+        for (int i = 0; i <= numOfEntries; i++) {
             // If we are at a null entry, skip it
             if (array[i] == null) {
                 continue;
@@ -435,14 +434,14 @@ public class ResizeableList<T> implements ListInterface<T> {
     public int getIndexOf(T entry) {
 
         // Loop through the array
-        for (int i = 1; i <= numOfEntries; i++) {
+        for (int i = 0; i <= numOfEntries; i++) {
             if(array[i] == null){
                 continue;
             }
             // If we find the element
             if (array[i].equals(entry)) {
                 // Return the indes
-                return i;
+                return i + 1;
             }
         }
 
