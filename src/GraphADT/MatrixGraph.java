@@ -13,9 +13,9 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     private ListInterface<ListInterface<Boolean>> adjMatrix;
 
     /**
-     * A dictionary of T-int pairs. The int is the 'index' of the vertex, and T is the label
+     * A list of vertices
      */
-    private DictionaryInterface<T, Integer> vertexLabels;
+    private ListInterface<T> vertices;
 
     /**
      * An int denoting the current number of edges in the graph.
@@ -72,11 +72,11 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
 
-        if(vertexLabels.contains(vertex)){
+        if(vertices.contains(vertex)){
             return false;
         }
 
-        vertexLabels.add(vertex, vertexLabels.getSize() + 1);
+        vertices.add(vertex);
         return true;
     }
 
@@ -85,10 +85,10 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
 
-        Integer beginIndex = vertexLabels.getValue(begin);
-        Integer endIndex = vertexLabels.getValue(end);
+        int beginIndex = vertices.getIndexOf(begin);
+        int endIndex = vertices.getIndexOf(end);
 
-        if(beginIndex == null || endIndex == null){
+        if(beginIndex == -1 || endIndex == -1){
             return false;
         }
 
@@ -103,10 +103,10 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
 
-        Integer beginIndex = vertexLabels.getValue(begin);
-        Integer endIndex = vertexLabels.getValue(end);
+        int beginIndex = vertices.getIndexOf(begin);
+        int endIndex = vertices.getIndexOf(end);
 
-        if(beginIndex == null || endIndex == null){
+        if(beginIndex == -1 || endIndex == -1){
             return false;
         }
 
@@ -129,7 +129,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     public int getNumberOfVertices() {
         // TODO Auto-generated method stub
         checkIntegrity();
-        return vertexLabels.getSize();
+        return vertices.getNumEntries();
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
         adjMatrix.clear();
-        vertexLabels.clear();
+        vertices.clear();
     }
 
     @Override
