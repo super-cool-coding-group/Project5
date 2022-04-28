@@ -1,7 +1,7 @@
 package src.GraphADT;
 
-import src.QueueADT.*;
-import src.StackADT.*;
+import src.QueueADT.QueueInterface;
+import src.StackADT.StackInterface;
 
 public interface GraphInterface<T>{
     /**
