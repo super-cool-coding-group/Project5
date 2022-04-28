@@ -56,7 +56,7 @@ public interface DictionaryInterface<K, V>{
      *
      * @return A ListInterface object of all the values in the dictionary.
      */
-    public ListInterface<K> getValues();
+    public ListInterface<V> getValues();
 
     /**
      * Checks whether or not this dictionary is empty.

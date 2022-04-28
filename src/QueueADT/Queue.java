@@ -45,7 +45,7 @@ public class Queue<T> implements QueueInterface<T>{
      * @param initialCapacity the initial capacity for the Queue.
      */
     public Queue(int initialCapacity){
-        queue = new ResizeableList<T>(initialCapacity); 
+        queue = new ResizeableList<T>(initialCapacity);
         integrityOk = true;
     }
 
@@ -58,7 +58,7 @@ public class Queue<T> implements QueueInterface<T>{
      */
     private void checkIntegrity(){
         if (!integrityOk) {
-            throw new SecurityException("ResizeableList object is corrupt or was not initialized properly.");
+            throw new SecurityException("Queue object is corrupt or was not initialized properly.");
         }
     }
 
@@ -81,8 +81,8 @@ public class Queue<T> implements QueueInterface<T>{
     @Override
     public T dequeue() {
         checkIntegrity();
-        T front = queue.get(1); 
-        queue.remove(1); 
+        T front = queue.get(1);
+        queue.remove(1);
         return front;
     }
 

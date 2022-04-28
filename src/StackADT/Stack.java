@@ -28,7 +28,7 @@ public class Stack<T> implements StackInterface<T>{
      */
     private void checkIntegrity(){
         if (!integrityOk) {
-            throw new SecurityException("ResizeableList object is corrupt or was not initialized properly.");
+            throw new SecurityException("Stack object is corrupt or was not initialized properly.");
         }
     }
 
