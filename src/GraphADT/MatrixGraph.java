@@ -52,6 +52,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
             }
             adjMatrix.add(subList);
         }
+        vertices = new ResizeableList<>(initialCapacity);
         numEdges = 0;
         integrityOk = true;
     }
