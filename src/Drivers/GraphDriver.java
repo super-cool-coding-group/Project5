@@ -27,19 +27,20 @@ public class GraphDriver {
 
         // Tests addEdge
         graph.addEdge('A', 'B');
-        graph.addEdge('A', 'B');
+        graph.addEdge('B', 'C');
         graph.addEdge('C', 'D');
         graph.addEdge('D', 'A');
 
 
         // Tests hasEdge
         System.out.println("Has Edge(true) = " + graph.hasEdge('A', 'B'));
+        System.out.println("Has Edge(true) = " + graph.hasEdge('B', 'C'));
 
         // Test getNumberOfVertices
         System.out.println("Vertices(4) = " + graph.getNumberOfVertices());
 
         // Test getNumberOfEdges
-        System.out.println("Edges(3) = " + graph.getNumberOfEdges());
+        System.out.println("Edges(4) = " + graph.getNumberOfEdges());
 
         // Test getBreadthFirstTraversal
         System.out.println(graph.getBreadthFirstTraversal('A'));
