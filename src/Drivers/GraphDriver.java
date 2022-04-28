@@ -16,13 +16,8 @@ public class GraphDriver {
 
     public static void main(String[] args){
         // Tests graph constructors
-<<<<<<< HEAD
-        MatrixGraph<Integer> graph = new MatrixGraph<>();
+        MatrixGraph<Character> graph = new MatrixGraph<>();
         MatrixGraph<String> graph2 = new MatrixGraph<>(1);
-=======
-        MatrixGraph<Character> graph = new MatrixGraph<Character>();
-        MatrixGraph<Character> graph2 = new MatrixGraph<>(1);
->>>>>>> a84c8013a5d37b4d38666954a3872de0c0b20030
 
         // Tests addVertex
         graph.addVertex('A');
@@ -49,15 +44,12 @@ public class GraphDriver {
         // Test getNumberOfEdges
         System.out.println("Edges(4) = " + graph.getNumberOfEdges());
 
-<<<<<<< HEAD
-=======
         // Test getBreadthFirstTraversal
         System.out.println(graph.getBreadthFirstTraversal('A'));
 
         // Test getDepthFirstTraversal
         System.out.println(graph.getDepthFirstTraversal('A'));
 
->>>>>>> a84c8013a5d37b4d38666954a3872de0c0b20030
         // Tests clear
         graph.clear();
 
