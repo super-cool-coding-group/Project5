@@ -39,34 +39,31 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     }
 
     /**
-     * Initialize the Graph's matrix with a specific capacity.
+     * Initialize the Graph's matrix and vertex list with a specific capacity.
      *
      * @param initialCapacity the initial capacity for the matrix.
      */
     public MatrixGraph(int initialCapacity){
+        // Initialize the adjacency matrix
         adjMatrix = new ResizeableList<>(initialCapacity);
-        for(int i = 0; i < initialCapacity; i++){
-            ListInterface<Boolean> subList = new ResizeableList<>(initialCapacity);
-            for(int ii = 0; ii < initialCapacity; ii++){
-                subList.add(false);
-            }
-            adjMatrix.add(subList);
-        }
+        // Initialize the vertices
         vertices = new ResizeableList<>(initialCapacity);
+        // Initialize the number of edges to 0
         numEdges = 0;
+        // Make the integrity okay
         integrityOk = true;
     }
 
     /**
-     * Checks the integrity of the Queue to make sure the constructor was
+     * Checks the integrity of the graph to make sure the constructor was
      * called.
      *
-     * @throws SecurityException if the Queue object was corrupted in some way or the
+     * @throws SecurityException if the graph object was corrupted in some way or the
      *                           constructor wasn't run properly.
      */
     private void checkIntegrity(){
         if (!integrityOk) {
-            throw new SecurityException("Queue object is corrupt or was not initialized properly.");
+            throw new SecurityException("Graph object is corrupt or was not initialized properly.");
         }
     }
 
@@ -81,6 +78,9 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         }
 
         vertices.add(vertex);
+
+        adjMatrix.add(new ResizeableList<Boolean>());
+
         return true;
     }
 
@@ -96,7 +96,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
             return false;
         }
 
-        adjMatrix.get(beginIndex).set(endIndex, true);
+        adjMatrix.get(beginIndex).add(endIndex, true);
         numEdges++;
 
         return true;
@@ -163,6 +163,42 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // TODO Auto-generated method stub
         checkIntegrity();
         return null;
+    }
+
+     /**
+     * Returns a string representation of a ResizeableList matrix
+     *
+     * @return The string representation of the matrix
+     */
+    public String previewMatrix(){
+        String out = "  ";
+
+        // Initialize the header of the vertex labels
+        for(int i = 1; i <= vertices.getNumEntries(); i++){
+            out += vertices.get(i) + " ";
+        }
+        out += "\n";
+
+        // Loop through the adjacency matrix
+        for(int i = 1; i <= adjMatrix.getNumEntries(); i++){
+            // Initialize the sidebar of the vertex labels
+            out += vertices.get(i) + " ";
+            // Loop through each sublist of the matrix
+            for(int j = 1; j <= adjMatrix.get(i).getNumEntries(); j++){
+                // Calculate the status of the matrix
+                Boolean status = this.adjMatrix.get(i).get(j);
+                if(status == null || !status){
+                    out += " "; // If it's false, it's a space
+                } else {
+                    out += "1"; // If there's an edge, we put a 1
+                }
+                out += " "; // Spacer for formatting
+            }
+            out += "\n"; // New line for formatting. We go to the next sublist
+        }
+
+        // Return the final output
+        return out;
     }
 
 }
