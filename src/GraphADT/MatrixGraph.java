@@ -1,10 +1,5 @@
 package src.GraphADT;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.text.html.HTMLDocument.Iterator;
-
 import src.ListADT.*;
 import src.QueueADT.*;
 import src.StackADT.*;
@@ -166,15 +161,15 @@ public class MatrixGraph<T> implements GraphInterface<T> {
         // TODO
 
         boolean visited[] = new boolean[vertices.getNumEntries()];
-        Queue<T> queue = new Queue<>();
+        QueueInterface<T> queue = new Queue<>();
 
         queue.enqueue(origin);
         visited[vertices.getIndexOf(origin) - 1] = true;
 
-        List<T> list = new ArrayList<>();
+        QueueInterface<T> traversalQueue = new Queue<>();
 
         while (!queue.isEmpty()) {
-            list.add(queue.getFront());
+            traversalQueue.enqueue(queue.getFront());
             T e = queue.dequeue();
             int index = vertices.getIndexOf(e);
 
@@ -188,11 +183,7 @@ public class MatrixGraph<T> implements GraphInterface<T> {
             }
         }
 
-        for (int j = 0; j < list.size(); j++) {
-            System.out.println(list.get(j));
-        }
-
-        return null;
+        return traversalQueue;
     }
 
     @Override
