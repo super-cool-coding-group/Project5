@@ -18,6 +18,7 @@ public class GraphDriver {
         // Tests graph constructors
         MatrixGraph<Character> graph = new MatrixGraph<>();
         MatrixGraph<String> graph2 = new MatrixGraph<>(1);
+        MatrixGraph<String> graph3 = new MatrixGraph<>();
 
         // Tests addVertex
         graph.addVertex('A');
@@ -86,6 +87,32 @@ public class GraphDriver {
 
         // Test getDepthFirstTraversal
         System.out.println(graph2.getDepthFirstTraversal("A"));
+
+
+        graph3.addVertex("A");
+        graph3.addVertex("B");
+        graph3.addVertex("C");
+        graph3.addVertex("D");
+        graph3.addVertex("E");
+        graph3.addVertex("F");
+        graph3.addVertex("G");
+        graph3.addVertex("H");
+        graph3.addVertex("I");
+
+        graph3.addEdge("A", "E");
+        graph3.addEdge("B", "A");
+        graph3.addEdge("B", "C");
+        graph3.addEdge("B", "E");
+        graph3.addEdge("E", "H");
+        graph3.addEdge("F", "B");
+        graph3.addEdge("F", "C");
+        graph3.addEdge("G", "H");
+        graph3.addEdge("H", "D");
+        graph3.addEdge("H", "F");
+        graph3.addEdge("H", "I");
+        graph3.addEdge("I", "F");
+
+        System.out.println(graph3.getDepthFirstTraversal("G"));
 
 
     }
