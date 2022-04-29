@@ -217,12 +217,10 @@ public class MatrixGraph<T> implements GraphInterface<T> {
         Boolean neighborVertexAdj;
         // Loop until we have no more vertices to check
         while(!remainingVertices.isEmpty()){
-            System.out.println(traversal);
             // Get the latest index of the top vertex in the stack
             currVertexIndex = vertices.getIndexOf(remainingVertices.peek());
             // Populate the currVertexRow variable from the adjacency matrix
             currVertexRow = adjMatrix.get(currVertexIndex);
-            System.out.println(vertices.get(currVertexIndex));
 
             // If we're at a leaf, just pop it
             if(currVertexRow.getNumEntries() == 0){

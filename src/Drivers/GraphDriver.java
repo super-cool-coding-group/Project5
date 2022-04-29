@@ -112,6 +112,7 @@ public class GraphDriver {
         graph3.addEdge("H", "I");
         graph3.addEdge("I", "F");
 
+        System.out.println(graph3.getBreadthFirstTraversal("G"));
         System.out.println(graph3.getDepthFirstTraversal("G"));
 
 
