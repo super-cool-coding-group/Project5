@@ -167,12 +167,12 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
         boolean visited[] = new boolean[vertices.getNumEntries()];
         Queue<T> queue = new Queue<>();
-    
+
         queue.enqueue(origin);
         visited[vertices.getIndexOf(origin) - 1] = true;
-    
+
         List<T> list = new ArrayList<>();
-    
+
         while (!queue.isEmpty()) {
             list.add(queue.getFront());
             T e = queue.dequeue();
@@ -196,10 +196,71 @@ public class MatrixGraph<T> implements GraphInterface<T> {
     }
 
     @Override
-    public StackInterface<T> getDepthFirstTraversal(T origin) {
+    public QueueInterface<T> getDepthFirstTraversal(T origin) {
         // TODO Auto-generated method stub
+        // Check the integrity of the graph
         checkIntegrity();
-        return null;
+
+        // Initialize variables to calculate the traversal
+        // The traversal queue holds the final traversal we will return
+        QueueInterface<T> traversal = new Queue<>();
+        // The remainingVertices stack holds the vertices that we are yet to fully complete
+        StackInterface<T> remainingVertices = new Stack<>();
+        // The visited bool array holds bools such that visited[i-1] = whether or not vertices.get(i) is visited
+        boolean[] visited = new boolean[vertices.getNumEntries()];
+
+        // Begin traversing from the origin
+        // We find the index of the origin
+        int currVertexIndex = vertices.getIndexOf(origin);
+        // The origin is the first item in the traversal
+        traversal.enqueue(origin);
+        // We now need to look through the neighbors of the origin, so we add the origin to the remaining vertices
+        remainingVertices.push(origin);
+        // We also set the origin to be visited in the visited array
+        visited[currVertexIndex-1] = true;
+
+        // Initialize variables to loop
+        // The row associated with each vertex in the adjacency matrix
+        ListInterface<Boolean> currVertexRow;
+        // The bool of whether or not each vertex in the row is a neighbor or not
+        Boolean neighborVertexAdj;
+        // Loop until we have no more vertices to check
+        while(!remainingVertices.isEmpty()){
+            // Get the latest index of the top vertex in the stack
+            currVertexIndex = vertices.getIndexOf(remainingVertices.peek());
+            // Populate the currVertexRow variable from the adjacency matrix
+            currVertexRow = adjMatrix.get(currVertexIndex);
+
+            // Loop through the currVertexRow to check for neighbors
+            for(int i = 1; i <= currVertexRow.getNumEntries(); i++){
+                // Populate our neighbor variable
+                neighborVertexAdj = currVertexRow.get(i);
+                // If the vertex is not a neighbor, or the vertex is already visited
+                if(neighborVertexAdj == null || !neighborVertexAdj || visited[i - 1]){
+                    // If we're at the end of the row, we need to pop the vertex
+                    // Since we are sure that there are no more neighbors in this vertex to check
+                    if(i == currVertexRow.getNumEntries()){
+                        // Remove the current vertex from the stack
+                        remainingVertices.pop();
+                    }
+                    continue;
+                }
+
+                // Since we are at a new vertex that hasn't been visited and is a neighbor
+                // We add the vertex to our traversal
+                traversal.enqueue(vertices.get(i));
+                // We also need to look at this vertex's neighbors
+                remainingVertices.push(vertices.get(i));
+                // We mark it as visited
+                visited[i-1] = true;
+                // Break, we only want to look at one vertex at a time
+                break;
+            }
+
+        }
+
+        // Return the final traversal
+        return traversal;
     }
 
     /**

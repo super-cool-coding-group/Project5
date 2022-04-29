@@ -1,7 +1,6 @@
 package src.GraphADT;
 
 import src.QueueADT.QueueInterface;
-import src.StackADT.StackInterface;
 
 public interface GraphInterface<T>{
     /**
@@ -61,8 +60,8 @@ public interface GraphInterface<T>{
     /**
      * Performs a depth-first traversal of this graph.
      * @param origin  The vertex to begin traversing at
-     * @return  A stack of the vertices in the traversal.
+     * @return  A queue of the vertices in the traversal.
      */
-    public StackInterface<T> getDepthFirstTraversal(T origin);
+    public QueueInterface<T> getDepthFirstTraversal(T origin);
 
 }
