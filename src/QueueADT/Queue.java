@@ -13,7 +13,8 @@ import src.ListADT.*;
  *
  * @author George Matta
  * @author Angelica Arteaga
- * @version 1.0
+ * @author Pierlorenzo Peruzzo
+ * @version 1.1
  */
 public class Queue<T> implements QueueInterface<T>{
 
@@ -125,5 +126,15 @@ public class Queue<T> implements QueueInterface<T>{
     public String toString(){
         return queue.toString();
     }
+
+    /**
+     * Gets the number of entries in a queue.
+     * @return The number of entries currently in this queue.
+     */
+    @Override
+    public Integer getNumEntries(){
+        return queue.count();
+    }
+
 
 }

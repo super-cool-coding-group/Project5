@@ -31,7 +31,6 @@ public class GraphDriver {
         graph.addEdge('C', 'D');
         graph.addEdge('D', 'A');
 
-
         System.out.println(graph.previewMatrix());
 
         // Tests hasEdge
@@ -44,7 +43,7 @@ public class GraphDriver {
         // Test getNumberOfEdges
         System.out.println("Edges(4) = " + graph.getNumberOfEdges());
 
-        // Test getBreadthFirstTraversal
+        // // Test getBreadthFirstTraversal
         System.out.println(graph.getBreadthFirstTraversal('A'));
 
         // Test getDepthFirstTraversal

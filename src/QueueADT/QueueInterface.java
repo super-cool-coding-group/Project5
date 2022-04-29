@@ -4,7 +4,8 @@ package src.QueueADT;
  * An interface to implement methods related to Queues.
 
  * @author George Matta
- * @version 1.0
+ * @author Pierlorenzo Peruzzo
+ * @version 1.1
  */
 public interface QueueInterface<T>{
 
@@ -42,5 +43,11 @@ public interface QueueInterface<T>{
      * Removes all entries from this queue.
      */
     public void clear();
+
+    /**
+     * Gets the number of entries in a queue.
+     * @return The number of entries currently in this queue.
+     */
+    public Integer getNumEntries();
 
 }

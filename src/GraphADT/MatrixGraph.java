@@ -1,10 +1,15 @@
 package src.GraphADT;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.swing.text.html.HTMLDocument.Iterator;
+
 import src.ListADT.*;
 import src.QueueADT.*;
 import src.StackADT.*;
 
-public class MatrixGraph<T> implements GraphInterface<T>{
+public class MatrixGraph<T> implements GraphInterface<T> {
 
     /**
      * The adjacency matrix of the graph.
@@ -22,19 +27,21 @@ public class MatrixGraph<T> implements GraphInterface<T>{
     private int numEdges;
 
     /**
-     * A boolean that keeps track of whether or not the constructor was properly called.
+     * A boolean that keeps track of whether or not the constructor was properly
+     * called.
      */
     private boolean integrityOk = false;
 
     /**
-     * The default/minimum capacity of any Adjacency Matrix. For this implementation, the default capacity is 10.
+     * The default/minimum capacity of any Adjacency Matrix. For this
+     * implementation, the default capacity is 10.
      */
     private static final int DEFAULT_CAPACITY = 10;
 
     /**
      * Default Constructor.
      */
-    public MatrixGraph(){
+    public MatrixGraph() {
         this(DEFAULT_CAPACITY);
     }
 
@@ -43,7 +50,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      *
      * @param initialCapacity the initial capacity for the matrix.
      */
-    public MatrixGraph(int initialCapacity){
+    public MatrixGraph(int initialCapacity) {
         // Initialize the adjacency matrix
         adjMatrix = new ResizeableList<>(initialCapacity);
         // Initialize the vertices
@@ -58,22 +65,22 @@ public class MatrixGraph<T> implements GraphInterface<T>{
      * Checks the integrity of the graph to make sure the constructor was
      * called.
      *
-     * @throws SecurityException if the graph object was corrupted in some way or the
+     * @throws SecurityException if the graph object was corrupted in some way or
+     *                           the
      *                           constructor wasn't run properly.
      */
-    private void checkIntegrity(){
+    private void checkIntegrity() {
         if (!integrityOk) {
             throw new SecurityException("Graph object is corrupt or was not initialized properly.");
         }
     }
-
 
     @Override
     public boolean addVertex(T vertex) {
         // TODO Auto-generated method stub
         checkIntegrity();
 
-        if(vertices.contains(vertex)){
+        if (vertices.contains(vertex)) {
             return false;
         }
 
@@ -92,7 +99,7 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         int beginIndex = vertices.getIndexOf(begin);
         int endIndex = vertices.getIndexOf(end);
 
-        if(beginIndex == -1 || endIndex == -1){
+        if (beginIndex == -1 || endIndex == -1) {
             return false;
         }
 
@@ -110,12 +117,12 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         int beginIndex = vertices.getIndexOf(begin);
         int endIndex = vertices.getIndexOf(end);
 
-        if(beginIndex == -1 || endIndex == -1){
+        if (beginIndex == -1 || endIndex == -1) {
             return false;
         }
 
         Boolean status = adjMatrix.get(beginIndex).get(endIndex);
-        if(status == null){
+        if (status == null) {
             status = false;
         }
 
@@ -153,8 +160,38 @@ public class MatrixGraph<T> implements GraphInterface<T>{
 
     @Override
     public QueueInterface<T> getBreadthFirstTraversal(T origin) {
-        // TODO Auto-generated method stub
         checkIntegrity();
+
+        // Check if origin is in the vertices
+        // TODO
+
+        boolean visited[] = new boolean[vertices.getNumEntries()];
+        Queue<T> queue = new Queue<>();
+    
+        queue.enqueue(origin);
+        visited[vertices.getIndexOf(origin) - 1] = true;
+    
+        List<T> list = new ArrayList<>();
+    
+        while (!queue.isEmpty()) {
+            list.add(queue.getFront());
+            T e = queue.dequeue();
+            int index = vertices.getIndexOf(e);
+
+            var row = adjMatrix.get(index);
+            for (int i = 1; i <= row.getNumEntries(); i++) {
+
+                if ((row.get(i) != null && row.get(i)) && !visited[i-1]) {
+                    queue.enqueue(vertices.get(i));
+                    visited[i-1] = true;
+                }
+            }
+        }
+
+        for (int j = 0; j < list.size(); j++) {
+            System.out.println(list.get(j));
+        }
+
         return null;
     }
 
@@ -165,29 +202,29 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         return null;
     }
 
-     /**
+    /**
      * Returns a string representation of a ResizeableList matrix
      *
      * @return The string representation of the matrix
      */
-    public String previewMatrix(){
+    public String previewMatrix() {
         String out = "  ";
 
         // Initialize the header of the vertex labels
-        for(int i = 1; i <= vertices.getNumEntries(); i++){
+        for (int i = 1; i <= vertices.getNumEntries(); i++) {
             out += vertices.get(i) + " ";
         }
         out += "\n";
 
         // Loop through the adjacency matrix
-        for(int i = 1; i <= adjMatrix.getNumEntries(); i++){
+        for (int i = 1; i <= adjMatrix.getNumEntries(); i++) {
             // Initialize the sidebar of the vertex labels
             out += vertices.get(i) + " ";
             // Loop through each sublist of the matrix
-            for(int j = 1; j <= adjMatrix.get(i).getNumEntries(); j++){
+            for (int j = 1; j <= adjMatrix.get(i).getNumEntries(); j++) {
                 // Calculate the status of the matrix
                 Boolean status = this.adjMatrix.get(i).get(j);
-                if(status == null || !status){
+                if (status == null || !status) {
                     out += " "; // If it's false, it's a space
                 } else {
                     out += "1"; // If there's an edge, we put a 1
@@ -200,5 +237,4 @@ public class MatrixGraph<T> implements GraphInterface<T>{
         // Return the final output
         return out;
     }
-
 }
