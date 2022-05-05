@@ -15,7 +15,8 @@ Implementations and demonstrations of Graphs in Java.
 - Each ADT is self-made
 - Generic Types
 - JavaDocs
-- Matrix Representation of Graph
+- Adjacency Matrix Representation of Graph
+- Adjacency List representation of Graph
 
 ## Video Link
 
