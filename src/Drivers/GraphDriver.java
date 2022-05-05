@@ -115,6 +115,37 @@ public class GraphDriver {
         System.out.println(graph3.getBreadthFirstTraversal("G"));
         System.out.println(graph3.getDepthFirstTraversal("G"));
 
+        ListGraph<String> graph4 = new ListGraph<>();
+        graph4.addVertex("A");
+        graph4.addVertex("B");
+        graph4.addVertex("C");
+        graph4.addVertex("D");
+        graph4.addVertex("E");
+        graph4.addVertex("F");
+        graph4.addVertex("G");
+        graph4.addVertex("H");
+        graph4.addVertex("I");
+
+        graph4.addEdge("A", "B");
+        graph4.addEdge("A", "D");
+        graph4.addEdge("A", "E");
+        graph4.addEdge("B", "E");
+        graph4.addEdge("D", "G");
+        graph4.addEdge("E", "F");
+        graph4.addEdge("E", "H");
+        graph4.addEdge("G", "H");
+        graph4.addEdge("F", "C");
+        graph4.addEdge("F", "H");
+        graph4.addEdge("H", "I");
+        graph4.addEdge("C", "B");
+        graph4.addEdge("I", "F");
+
+        System.out.println(graph4.previewList());
+        // Test getBreadthFirstTraversal
+        System.out.println(graph4.getBreadthFirstTraversal("A"));
+
+        // Test getDepthFirstTraversal
+        System.out.println(graph4.getDepthFirstTraversal("A"));
 
     }
 
