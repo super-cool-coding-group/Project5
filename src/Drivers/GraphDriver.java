@@ -139,14 +139,14 @@ public class GraphDriver {
         graph4.addEdge("H", "I");
         graph4.addEdge("C", "B");
         graph4.addEdge("I", "F");
-
+        
         System.out.println(graph4.previewList());
+
         // Test getBreadthFirstTraversal
         System.out.println(graph4.getBreadthFirstTraversal("A"));
 
         // Test getDepthFirstTraversal
         System.out.println(graph4.getDepthFirstTraversal("A"));
-
     }
 
 }

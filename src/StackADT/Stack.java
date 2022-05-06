@@ -34,35 +34,30 @@ public class Stack<T> implements StackInterface<T>{
 
     @Override
     public void push(T entry){
-        // TODO Auto-generated method stub
         checkIntegrity();
         stackList.add(entry);
     }
 
     @Override
     public T pop(){
-        // TODO Auto-generated method stub
         checkIntegrity();
         return stackList.remove();
     }
 
     @Override
     public T peek(){
-        // TODO Auto-generated method stub
         checkIntegrity();
         return stackList.get(stackList.getNumEntries());
     }
 
     @Override
     public boolean isEmpty(){
-        // TODO Auto-generated method stub
         checkIntegrity();
         return stackList.isEmpty();
     }
 
     @Override
     public void clear(){
-        // TODO Auto-generated method stub
         checkIntegrity();
         stackList.clear();
     }

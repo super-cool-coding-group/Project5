@@ -72,7 +72,6 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
     @Override
     public boolean addVertex(T vertex) {
-        // TODO Auto-generated method stub
         checkIntegrity();
 
         if (vertices.contains(vertex)) {
@@ -88,7 +87,6 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
     @Override
     public boolean addEdge(T begin, T end) {
-        // TODO Auto-generated method stub
         checkIntegrity();
 
         int beginIndex = vertices.getIndexOf(begin);
@@ -106,7 +104,6 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
     @Override
     public boolean hasEdge(T begin, T end) {
-        // TODO Auto-generated method stub
         checkIntegrity();
 
         int beginIndex = vertices.getIndexOf(begin);
@@ -126,28 +123,24 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
         checkIntegrity();
         return adjMatrix.isEmpty();
     }
 
     @Override
     public int getNumberOfVertices() {
-        // TODO Auto-generated method stub
         checkIntegrity();
         return vertices.getNumEntries();
     }
 
     @Override
     public int getNumberOfEdges() {
-        // TODO Auto-generated method stub
         checkIntegrity();
         return numEdges;
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
         checkIntegrity();
         adjMatrix.clear();
         vertices.clear();
@@ -155,40 +148,51 @@ public class MatrixGraph<T> implements GraphInterface<T> {
 
     @Override
     public QueueInterface<T> getBreadthFirstTraversal(T origin) {
+        
         checkIntegrity();
 
-        // Check if origin is in the vertices
-        // TODO
-
+        // The visited bool array holds bools such that visited[i-1] = whether or not vertices.get(i) is visited
         boolean visited[] = new boolean[vertices.getNumEntries()];
         QueueInterface<T> queue = new Queue<>();
 
+        // Add to the visited vertex the passed origin
         queue.enqueue(origin);
         visited[vertices.getIndexOf(origin) - 1] = true;
 
-        QueueInterface<T> traversalQueue = new Queue<>();
+        // The queue to hold the final result of the visited vertex
+        QueueInterface<T> resQueue = new Queue<>();
 
+        // Loop through the queue until is empty
         while (!queue.isEmpty()) {
-            traversalQueue.enqueue(queue.getFront());
-            T e = queue.dequeue();
-            int index = vertices.getIndexOf(e);
-
+            // Add the visited vertex the result queue
+            resQueue.enqueue(queue.getFront());
+            // Now we dequeue the first vertex
+            T currentVertex = queue.dequeue();
+            // And we use the element to find its index in the matrix
+            int index = vertices.getIndexOf(currentVertex);
+            // So finally we can get the row of the matrix containing the adjacent vertices
             var row = adjMatrix.get(index);
+            
+            // We loop through the row
             for (int i = 1; i <= row.getNumEntries(); i++) {
 
+                // Check if the value of row[i] is 1 (ie: there is a connection to our currentVertex)
+                // and if we did not already visited this vertex (i-1 because the array is index 0 while the ListInterface is index 1)
                 if ((row.get(i) != null && row.get(i)) && !visited[i-1]) {
+                    // If this is the case, we register the vertex                    
                     queue.enqueue(vertices.get(i));
+                    // And we also make sure to mark the vertex as visited
                     visited[i-1] = true;
                 }
             }
         }
 
-        return traversalQueue;
+        return resQueue;
     }
 
     @Override
     public QueueInterface<T> getDepthFirstTraversal(T origin) {
-        // TODO Auto-generated method stub
+
         // Check the integrity of the graph
         checkIntegrity();
 
