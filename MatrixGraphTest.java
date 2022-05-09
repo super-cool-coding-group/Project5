@@ -16,7 +16,7 @@ import src.GraphADT.MatrixGraph;
  * @author Angelica Arteaga
  */
 public class MatrixGraphTest{
-    
+
     MatrixGraph<Character> graph = new MatrixGraph<>();
     MatrixGraph<Character> graph2 = new MatrixGraph<>(1);
 
@@ -115,7 +115,6 @@ public class MatrixGraphTest{
         String expected = "[A, B, D, E, G, F, H, C, I], Capacity: 10, NumEntries: 9"; 
         String actual = graph.getBreadthFirstTraversal('A').toString();
         assertEquals(expected, actual);
-        
     }
 
     @Test
@@ -150,24 +149,4 @@ public class MatrixGraphTest{
         assertEquals(expected, actual);
     }
 
-    @Test
-    public void testPreviewMatrix(){
-        graph.addVertex('A');
-        graph.addVertex('B');
-        graph.addVertex('C');
-        graph.addVertex('D');
-
-        // Tests addEdge
-        graph.addEdge('A', 'B');
-        graph.addEdge('B', 'C');
-        graph.addEdge('C', 'D');
-        graph.addEdge('D', 'A');
-
-        System.out.println(graph.previewMatrix());
-        String expected = "  A B C D \nA   1 \nB     1 \nC       1 \nD 1 ";
-        String actual = graph.previewMatrix();
-        assertEquals(expected, actual);
-
-    }
-    
 }
