@@ -1,3 +1,4 @@
+package src.UnitTests;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -5,9 +6,7 @@ import org.junit.Test;
 import src.GraphADT.MatrixGraph;
 
 /**
- * This is the testing class we use to test the methods we implemented for this project.
- *
- * We test the methods for the MatrixGraph class.
+ * This is the testing class we use to test the methods we implemented for Matrix Graph.
  *
  * The methods we are testing are breadth first traversal, depth first traversal, is empty, and clear.
  *
