@@ -35,8 +35,8 @@ public class GraphDriver {
         System.out.println(graph.previewMatrix());
 
         // Tests hasEdge
-        System.out.println("Has Edge(true) = " + graph.hasEdge('A', 'B'));
-        System.out.println("Has Edge(true) = " + graph.hasEdge('B', 'C'));
+        System.out.println("Has Edge {A,B}(true) = " + graph.hasEdge('A', 'B'));
+        System.out.println("Has Edge {B,C}(true) = " + graph.hasEdge('B', 'C'));
 
         // Test getNumberOfVertices
         System.out.println("Vertices(4) = " + graph.getNumberOfVertices());
