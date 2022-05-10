@@ -19,7 +19,6 @@ public interface StackInterface<T>{
      * Removes and returns this stack's top entry.
      *
      * @return The object at the top of the stack.
-     * @throws EmptyStackException if the stack is empty before the operation.
      */
     public T pop();
 
@@ -27,7 +26,6 @@ public interface StackInterface<T>{
      * Gets the item at the top of the stack.
      *
      * @return The object at the top of the stack.
-     * @throws EmptyStackException if the stack is empty.
      */
     public T peek();
 

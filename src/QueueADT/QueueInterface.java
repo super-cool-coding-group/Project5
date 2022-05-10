@@ -20,7 +20,6 @@ public interface QueueInterface<T>{
      * Removes and returns the entry at the front of this queue.
      *
      * @return The object at the front of the queue.
-     * @throws EmptyQueueException if the queue is already empty.
      */
     public T dequeue();
 
@@ -28,7 +27,6 @@ public interface QueueInterface<T>{
      * Gets the entry at the front of this queue.
      *
      * @return The object at the front of the queue.
-     * @throws EmptyQueueException if the queue is empty.
      */
     public T getFront();
 
