@@ -19,7 +19,8 @@ Implementations and demonstrations of Graphs in Java.
 - Adjacency List representation of Graph
 
 ## Video Link
+- No Video
 
 ## JavaDoc Index Link
-
+- https://github.com/super-cool-coding-group/Project5/blob/main/javadocs/index.html
 
