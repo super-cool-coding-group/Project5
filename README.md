@@ -7,7 +7,7 @@ Implementations and demonstrations of Graphs in Java.
 - Pierlorenzo Peruzzo
     - Implemented BFS. Tested BFS
 - Angelica Arteaga
-    - Implemented Queue class. Tested Graph and Queue.
+    - Implemented Queue class. Tested Graph and Queue. Created actual unit tests rather than drivers for graphs.
 
 ## Extra Features
 - Super cool code courtesy of the Super Cool Coding Group
