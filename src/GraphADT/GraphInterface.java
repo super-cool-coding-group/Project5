@@ -2,6 +2,12 @@ package src.GraphADT;
 
 import src.QueueADT.QueueInterface;
 
+/**
+ * An interface to implement methods related to Graphs.
+
+ * @author George Matta
+ * @version 1.0
+ */
 public interface GraphInterface<T>{
     /**
      * Adds a vertex to this graph.

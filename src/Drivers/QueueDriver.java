@@ -14,6 +14,11 @@ import src.QueueADT.*;
  */
 public class QueueDriver {
 
+    /**
+     * We just have a main method to run the various Queue-related methods
+     *
+     * @param args The general args param for any Java main method
+     */
     public static void main(String[] args){
         Queue<Integer> testQueue = new Queue<Integer>(1);
 

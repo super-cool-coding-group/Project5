@@ -4,6 +4,18 @@ import src.ListADT.*;
 import src.QueueADT.*;
 import src.StackADT.*;
 
+/**
+ * An implementation of the GraphInterface interface to store graphs using an Adjacency List
+ *
+ * We have variables for the list itself, a list of vertices, and a number of edges calculation.
+ *
+ * We also have methods to add a vertex, add an edge between two vertices, run a BFS traversal,
+ * and a DFS traversal (in addition to some miscellaneous methods like clear and isEmpty)
+ *
+ * @author George Matta
+ * @author Pierlorenzo Perruzo
+ * @version 1.0
+ */
 public class ListGraph<T> implements GraphInterface<T> {
 
     /**
@@ -70,99 +82,158 @@ public class ListGraph<T> implements GraphInterface<T> {
         }
     }
 
+     /**
+     * Adds a vertex to the graph.
+     * If the graph already contains the vertex, we don't add it again.
+     * To add a vertex, we add the vertex to the vertices list and we create a new entry for it in the adjacency list.
+     *
+     * @param vertex The vertex we are adding to the graph.
+     * @return A boolean denoting whether or not we sucessfully added the vertex.
+     */
     @Override
     public boolean addVertex(T vertex) {
+        // Check the integrity
         checkIntegrity();
 
+        // If the vertex is already in the graph, don't add it again
         if (vertices.contains(vertex)) {
             return false;
         }
 
+        // Add the vertex to the vertices list
         vertices.add(vertex);
 
+        // Add a new entry to the adjacency list
         adjList.add(new ResizeableList<T>());
 
+        // We sucessfully added the vertex, so return true
         return true;
     }
 
+    /**
+     * Adds an edge between two vertices, a begin and an end vertex.
+     * If either of the vertices don't exist in the graph, we return false.
+     * Otherwise, we add the end vertex to the adjList's begin vertex's index's list
+     *
+     * @param begin The starting vertex of the edge.
+     * @param end The ending vertex of the edge.
+     * @return A boolean denoting whether or not we sucessfully added an edge.
+     */
     @Override
     public boolean addEdge(T begin, T end) {
+        // Check the integrity
         checkIntegrity();
 
+        // Check if the beginning index exists in the vertices
         int beginIndex = vertices.getIndexOf(begin);
 
+        // If the beginning vertex doesn't exist, return false
         if (beginIndex == -1) {
             return false;
         }
 
+        // If the end vertex doesn't exist, return false
         if(!vertices.contains(end)){
             return false;
         }
 
+        // Get the list of adjacent vertices of the beginning vertex
         ListInterface<T> adjacentVertices = adjList.get(beginIndex);
 
-        for(T vertex : adjacentVertices.getArray()){
-            if(vertex != null && vertex.equals(end)){
-                return false;
-            }
+        // If the end vertex is already in that list, return false
+        if (adjacentVertices.contains(end)){
+            return false;
         }
+
+        // Otherwise, add the edge
         adjacentVertices.add(end);
 
+        // Increment the number of edges
         numEdges++;
 
+        // Return true since we added the edge
         return true;
     }
 
+    /**
+     * Checks whether or not an edge exists between two vertices.
+     *
+     * @param begin The starting vertex of the edge.
+     * @param end The ending vertex of the edge.
+     * @return A boolean denoting whether or not an edge exists between two vertices.
+     */
     @Override
     public boolean hasEdge(T begin, T end) {
+        // Check the integrity
         checkIntegrity();
 
+        // Get the beginning vertex's index
         int beginIndex = vertices.getIndexOf(begin);
 
+        // If the beginning vertex doesn't exist, return false
         if (beginIndex == -1) {
             return false;
         }
 
+        // If the ending vertex doesn't exist, return false
         if(!vertices.contains(end)){
             return false;
         }
 
-        ListInterface<T> adjacentVertices = adjList.get(beginIndex);
-
-        for(T vertex : adjacentVertices.getArray()){
-            if(vertex != null && vertex.equals(end)){
-                return true;
-            }
-        }
-
-        return true;
+        // Return whether or not the ending vertex is adjacent to the beginning
+        return adjList.get(beginIndex).contains(end);
     }
 
+    /**
+     * Returns whether or not the graph is empty
+     *
+     * @return A boolean denoting whether or not the graph is empty.
+     */
     @Override
     public boolean isEmpty() {
         checkIntegrity();
         return adjList.isEmpty();
     }
 
+    /**
+     * Gets the number of vertices in the graph
+     *
+     * @return The number of entries in the vertices list.
+     */
     @Override
     public int getNumberOfVertices() {
         checkIntegrity();
         return vertices.getNumEntries();
     }
 
+    /**
+     * Gets the number of edges in the graph.
+     *
+     * @return The numEdges field.
+     */
     @Override
     public int getNumberOfEdges() {
         checkIntegrity();
         return numEdges;
     }
 
+     /**
+     * Clears a graph of all its vertices and edges.
+     */
     @Override
     public void clear() {
         checkIntegrity();
         adjList.clear();
         vertices.clear();
+        numEdges = 0;
     }
 
+     /**
+     * Gets the Breadth-First traversal of a graph given an origin
+     *
+     * @param origin The origin vertex we are starting traversal from
+     * @return A QueueInterface object of the traversal.
+     */
     @Override
     public QueueInterface<T> getBreadthFirstTraversal(T origin) {
         checkIntegrity();
@@ -188,17 +259,17 @@ public class ListGraph<T> implements GraphInterface<T> {
             int index = vertices.getIndexOf(currentVertex);
             // So finally we can get the row of the matrix containing the adjacent vertices
             var row = adjList.get(index);
-            
+
             // We loop through the row
             for (int i = 1; i <= row.getNumEntries(); i++) {
 
                 T adjVertx =row.get(i);
                 if (adjVertx == null)
-                    continue; 
-                
+                    continue;
+
                 int adjVertexIndex = vertices.getIndexOf(adjVertx);
                 if (!visited[adjVertexIndex-1]){
-                    // If this is the case, we register the vertex                    
+                    // If this is the case, we register the vertex
                     queue.enqueue(adjVertx);
                     // And we also make sure to mark the vertex as visited
                     visited[adjVertexIndex-1] = true;
@@ -209,6 +280,12 @@ public class ListGraph<T> implements GraphInterface<T> {
         return resQueue;
     }
 
+     /**
+     * Gets the Depth-First traversal of a graph given an origin
+     *
+     * @param origin The origin vertex we are starting traversal from
+     * @return A QueueInterface object of the traversal.
+     */
     @Override
     public QueueInterface<T> getDepthFirstTraversal(T origin) {
         // Check the integrity of the graph

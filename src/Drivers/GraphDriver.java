@@ -14,6 +14,11 @@ import src.GraphADT.*;
  */
 public class GraphDriver {
 
+    /**
+     * We just have a main method to run the various Graph-related methods
+     *
+     * @param args The general args param for any Java main method
+     */
     public static void main(String[] args){
         // Tests graph constructors
         MatrixGraph<Character> graph = new MatrixGraph<>();
@@ -139,7 +144,7 @@ public class GraphDriver {
         graph4.addEdge("H", "I");
         graph4.addEdge("C", "B");
         graph4.addEdge("I", "F");
-        
+
         System.out.println(graph4.previewList());
 
         // Test getBreadthFirstTraversal

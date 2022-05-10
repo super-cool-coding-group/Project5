@@ -4,6 +4,18 @@ import src.ListADT.*;
 import src.QueueADT.*;
 import src.StackADT.*;
 
+/**
+ * An implementation of the GraphInterface interface to store graphs using an Adjacency Matrix
+ *
+ * We have variables for the matrix itself, a list of vertices, and a number of edges calculation.
+ *
+ * We also have methods to add a vertex, add an edge between two vertices, run a BFS traversal,
+ * and a DFS traversal (in addition to some miscellaneous methods like clear and isEmpty)
+ *
+ * @author George Matta
+ * @author Pierlorenzo Perruzo
+ * @version 2.0
+ */
 public class MatrixGraph<T> implements GraphInterface<T> {
 
     /**
@@ -70,85 +82,154 @@ public class MatrixGraph<T> implements GraphInterface<T> {
         }
     }
 
+    /**
+     * Adds a vertex to the graph.
+     * If the graph already contains the vertex, we don't add it again.
+     * To add a vertex, we add the vertex to the vertices list and we create a new entry for it in the adjacency matrix.
+     *
+     * @param vertex The vertex we are adding to the graph.
+     * @return A boolean denoting whether or not we sucessfully added the vertex.
+     */
     @Override
     public boolean addVertex(T vertex) {
+        // Check the integrity
         checkIntegrity();
 
+        // Check if the vertex is already in the graph
         if (vertices.contains(vertex)) {
             return false;
         }
 
+        // Since it is a unique vertex, we add it to the vertices
         vertices.add(vertex);
 
+        // And add it to the adjMatrix
         adjMatrix.add(new ResizeableList<Boolean>());
 
+        // We sucessfully added the vertex, so return true
         return true;
     }
 
+    /**
+     * Adds an edge between two vertices, a begin and an end vertex.
+     * If either of the vertices don't exist in the graph, we return false.
+     * Otherwise, we set the adjacencyMatrix[begin][end] to be true and increment the number of edges
+     *
+     * @param begin The starting vertex of the edge.
+     * @param end The ending vertex of the edge.
+     * @return A boolean denoting whether or not we sucessfully added an edge.
+     */
     @Override
     public boolean addEdge(T begin, T end) {
+        // Check the integrity
         checkIntegrity();
 
+        // Get the index of the beginning vertex and the ending vertex from the vertices
         int beginIndex = vertices.getIndexOf(begin);
         int endIndex = vertices.getIndexOf(end);
 
+        // If either vertex doesn't exist, return
         if (beginIndex == -1 || endIndex == -1) {
             return false;
         }
 
+        // Otherwise, set the edge between them to be true in the adjMatrix
         adjMatrix.get(beginIndex).add(endIndex, true);
+
+        // Increment the num of edges
         numEdges++;
 
+        // Return true since we sucessfully added the edge
         return true;
     }
 
+    /**
+     * Checks whether or not an edge exists between two vertices.
+     *
+     * @param begin The starting vertex of the edge.
+     * @param end The ending vertex of the edge.
+     * @return A boolean denoting whether or not an edge exists between two vertices.
+     */
     @Override
     public boolean hasEdge(T begin, T end) {
+        // Check the integrity
         checkIntegrity();
 
+        // Get the indices of the beginning and ending vertex in the vertcies list
         int beginIndex = vertices.getIndexOf(begin);
         int endIndex = vertices.getIndexOf(end);
 
+        // If either of the vertices don't exist, there is no edge
         if (beginIndex == -1 || endIndex == -1) {
             return false;
         }
 
+        // Otherwise, get the status of the edge
         Boolean status = adjMatrix.get(beginIndex).get(endIndex);
+
+        // Since it is a Boolean object rather than a boolean primative, it may be null.
+        // If it's null, there's no edge.
         if (status == null) {
             status = false;
         }
 
+        // Return the status of the edge's existence
         return status;
     }
 
+    /**
+     * Returns whether or not the graph is empty
+     *
+     * @return A boolean denoting whether or not the graph is empty.
+     */
     @Override
     public boolean isEmpty() {
         checkIntegrity();
         return adjMatrix.isEmpty();
     }
 
+    /**
+     * Gets the number of vertices in the graph
+     *
+     * @return The number of entries in the vertices list.
+     */
     @Override
     public int getNumberOfVertices() {
         checkIntegrity();
         return vertices.getNumEntries();
     }
 
+    /**
+     * Gets the number of edges in the graph.
+     *
+     * @return The numEdges field.
+     */
     @Override
     public int getNumberOfEdges() {
         checkIntegrity();
         return numEdges;
     }
 
+    /**
+     * Clears a graph of all its vertices and edges.
+     */
     @Override
     public void clear() {
         checkIntegrity();
         adjMatrix.clear();
         vertices.clear();
+        numEdges = 0;
     }
 
+    /**
+     * Gets the Breadth-First traversal of a graph given an origin
+     *
+     * @param origin The origin vertex we are starting traversal from
+     * @return A QueueInterface object of the traversal.
+     */
     @Override
     public QueueInterface<T> getBreadthFirstTraversal(T origin) {
-        
+
         checkIntegrity();
 
         // The visited bool array holds bools such that visited[i-1] = whether or not vertices.get(i) is visited
@@ -172,14 +253,14 @@ public class MatrixGraph<T> implements GraphInterface<T> {
             int index = vertices.getIndexOf(currentVertex);
             // So finally we can get the row of the matrix containing the adjacent vertices
             var row = adjMatrix.get(index);
-            
+
             // We loop through the row
             for (int i = 1; i <= row.getNumEntries(); i++) {
 
                 // Check if the value of row[i] is 1 (ie: there is a connection to our currentVertex)
                 // and if we did not already visited this vertex (i-1 because the array is index 0 while the ListInterface is index 1)
                 if ((row.get(i) != null && row.get(i)) && !visited[i-1]) {
-                    // If this is the case, we register the vertex                    
+                    // If this is the case, we register the vertex
                     queue.enqueue(vertices.get(i));
                     // And we also make sure to mark the vertex as visited
                     visited[i-1] = true;
@@ -190,6 +271,12 @@ public class MatrixGraph<T> implements GraphInterface<T> {
         return resQueue;
     }
 
+    /**
+     * Gets the Depth-First traversal of a graph given an origin
+     *
+     * @param origin The origin vertex we are starting traversal from
+     * @return A QueueInterface object of the traversal.
+     */
     @Override
     public QueueInterface<T> getDepthFirstTraversal(T origin) {
 

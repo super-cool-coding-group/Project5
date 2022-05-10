@@ -3,29 +3,33 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
-import src.GraphADT.MatrixGraph;
+import src.GraphADT.ListGraph;
 
 /**
- * This is the testing class we use to test the methods we implemented for Matrix Graph.
+ * This is the testing class we use to test the methods we implemented for List Graph.
  *
  * The methods we are testing are breadth first traversal, depth first traversal, is empty, and clear.
  *
  * We use the JUnit testing framework to run these tests.
  *
+ * This is basically a copy of the MatrixGraphTest file but with the ListGraph rather than the MatrixGraph.
+ * Because of OOP, the actual calling of the methods is abstracted away and everything works as it should.
+ *
  * @author Angelica Arteaga
+ * @author George Matta
  * @version 1.0
  */
-public class MatrixGraphTest{
+public class ListGraphTest{
 
     /**
      * A graph created using the default constructor.
      */
-    MatrixGraph<Character> graph = new MatrixGraph<>();
+    ListGraph<Character> graph = new ListGraph<>();
 
     /**
      * A graph created using the regular constructor.
      */
-    MatrixGraph<Character> graph2 = new MatrixGraph<>(1);
+    ListGraph<Character> graph2 = new ListGraph<>(1);
 
     /**
      * Tests adding a vertex into a graph
