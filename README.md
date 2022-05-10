@@ -23,4 +23,3 @@ Implementations and demonstrations of Graphs in Java.
 
 ## JavaDoc Index Link
 - https://github.com/super-cool-coding-group/Project5/blob/main/javadocs/index.html
-
